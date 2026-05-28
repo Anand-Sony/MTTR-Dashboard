@@ -33,12 +33,25 @@ def download_plot_as_html(fig, filename):
 uploaded_file = st.file_uploader("Upload your file in CSV, xls, xlsx Format only", type=["csv", "xls", "xlsx"])
 
 if uploaded_file:
-    df = pd.read_csv(uploaded_file)
+    if uploaded_file.name.endswith('.csv'):
+        df = pd.read_csv(uploaded_file)
+    else:
+        df = pd.read_excel(uploaded_file)
 
+    # Rename columns to match internal naming convention
+    df.rename(columns={
+        'Line-ID': 'Line',
+        'Machine-ID': 'Machine',
+        'Start-Time': 'StartTime',
+        'End-Time': 'EndTime',
+        'Category Defect': 'L1Loss',
+        'Sub-Category Defect': 'L2Loss',
+        'Down-Time': 'LossTime'
+    }, inplace=True)
 
-        # Convert StartTime and EndTime to datetime
-    df['StartTime'] = pd.to_datetime(df['StartTime'])
-    df['EndTime'] = pd.to_datetime(df['EndTime'])
+    # Convert StartTime and EndTime to datetime
+    df['StartTime'] = pd.to_datetime(df['StartTime'], dayfirst=True)
+    df['EndTime'] = pd.to_datetime(df['EndTime'], dayfirst=True)
 
     st.sidebar.subheader("⏱️ Time Range Filter")
 
@@ -48,7 +61,6 @@ if uploaded_file:
 
     # Sidebar date and time inputs
     start_date = st.sidebar.date_input("Start Date", min_time.date())
-
     end_date = st.sidebar.date_input("End Date", max_time.date())
 
     # Combine selected date and time to datetime
@@ -59,10 +71,8 @@ if uploaded_file:
         st.error("❌ End Time cannot be earlier than Start Time. Please correct the selection.")
         st.stop()
 
-
     # Filter the dataframe based on selected range
     df = df[(df['StartTime'] >= selected_start) & (df['EndTime'] <= selected_end)]
-
 
     # Sidebar filter for LossTime
     with st.sidebar:
@@ -81,7 +91,6 @@ if uploaded_file:
 
     # Now filter the data only based on the applied value
     df = df[df['LossTime'] >= min_loss_time]
-
 
     total_available_time_minutes = 24 * 60  # Can be customized
 
@@ -257,8 +266,6 @@ if uploaded_file:
     df_summary['TotalLossTime'] = df_summary['LossTime']
     df_summary['Defect'] = df_summary['L1Loss'] + " - " + df_summary['L2Loss']
 
-    
-
     grouped_defects = df_summary.groupby(['Defect', 'Line', 'Machine']).agg(
         Frequency=('Frequency', 'sum'),
         TotalLossTime=('TotalLossTime', 'sum')
@@ -283,8 +290,6 @@ if uploaded_file:
     overall_common = overall_common.merge(machine_lists, on='Defect')
     overall_common = overall_common.merge(line_counts, on='Defect')
     overall_common = overall_common.merge(line_lists, on='Defect')
-
-    
 
     if not overall_common.empty:
         overall_common['MTTR'] = overall_common['MTTR'].round(2)
