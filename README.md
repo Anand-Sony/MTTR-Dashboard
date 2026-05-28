@@ -12,9 +12,10 @@
 
 ---
 
+
 ## 🚀 Live App
 
-> **[👉 Click here to open the dashboard]([https://anand-sony-mttr-dashboard.streamlit.app](https://dkxsds6bfnnebiz4jxkr4j.streamlit.app/))**
+> **[👉 Click here to open the dashboard](https://anand-sony-mttr-dashboard.streamlit.app)**
 
 No installation needed — runs directly in your browser.
 
