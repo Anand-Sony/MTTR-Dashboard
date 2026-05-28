@@ -4,8 +4,6 @@
 
 <p>Interactive dashboard to track <strong>Mean Time To Repair</strong> across production lines, machines, and defect categories.</p>
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://anand-sony-mttr-dashboard.streamlit.app)
-
 ![Python](https://img.shields.io/badge/Python-3.x-blue?style=flat-square)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.45.1-red?style=flat-square)
 ![Plotly](https://img.shields.io/badge/Plotly-5.24.1-green?style=flat-square)
@@ -16,7 +14,7 @@
 
 ## 🚀 Live App
 
-> **[👉 Click here to open the dashboard](https://anand-sony-mttr-dashboard.streamlit.app)**
+> **[👉 Click here to open the dashboard]([https://anand-sony-mttr-dashboard.streamlit.app](https://dkxsds6bfnnebiz4jxkr4j.streamlit.app/))**
 
 No installation needed — runs directly in your browser.
 
