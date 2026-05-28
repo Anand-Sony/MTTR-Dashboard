@@ -95,3 +95,7 @@ MTTR-Dashboard/
 ## 📬 Contact
 
 Built by **Anand Soni** · [GitHub Profile](https://github.com/Anand-Sony)
+
+## ⭐ Support
+
+## If you found this project useful, consider giving it a ⭐ on GitHub!
