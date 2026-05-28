@@ -30,7 +30,7 @@ def download_plot_as_html(fig, filename):
     href = f'<a href="data:text/html;base64,{b64}" download="{filename}">📥 Download {filename}</a>'
     return href
 
-uploaded_file = st.file_uploader("Upload your file in CSV, xls, xlsx Format only", type=["csv", "xls", "xlsx"])
+uploaded_file = st.file_uploader("Upload your file in CSV Format only", type=["csv"])
 
 if uploaded_file:
     if uploaded_file.name.endswith('.csv'):
@@ -300,4 +300,4 @@ if uploaded_file:
     st.dataframe(overall_common[['Defect', 'Lines', 'Machines', 'Total_Frequency', 'MTTR']])
 
 else:
-    st.info("Please upload a file in CSV, xls, xlsx format to get started.")
+    st.info("Please upload a file in CSV format to get started.")
